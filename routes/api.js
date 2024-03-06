@@ -17,6 +17,22 @@ apiRoutes.post('/create-link', async (req, res) => {
             return;
         }
 
+        if(path.length > 30){
+            res.send({
+                action: 'create-link',
+                type: 'error',
+                message: 'Alias can not be more than 30 characters.'
+            })
+            return; 
+        }
+        if(url.length > 250){
+            res.send({
+                action: 'create-link',
+                type: 'error',
+                message: 'URL can not be longer than 250 characters.'
+            })
+            return; 
+        }
 
         const results = await URLModel.find({ alias: `/${path}` });
         if (results.length > 0) {
@@ -26,6 +42,19 @@ apiRoutes.post('/create-link', async (req, res) => {
                 message: 'Alias already in use.'
             })
             return;
+        }
+
+        // Make sure links are valid
+        const regex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/g
+        const shouldProceed = regex.test(url);
+
+        if(!shouldProceed){
+            res.send({
+                action: 'create-link',
+                type: 'error',
+                message: 'Enter a valid link.'
+            })
+            return;  
         }
 
         const link = new URLModel({

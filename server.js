@@ -15,6 +15,7 @@ store.on('error', function(error) {
     return;
 });
 
+// Unimplimented Sessions
 app.use(session({
     secret: process.env.sessionSecret, // Random string
     resave: false,
