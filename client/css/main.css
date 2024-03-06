@@ -1,0 +1,93 @@
+* {
+    font-family: Helvetica, arial;
+    user-select: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+body {
+    background: #262626;
+}
+
+.content {
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    width: max-content;
+}
+
+.main-title {
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.input {
+    margin-bottom: 20px;
+    height: 3vh;
+    border: none;
+    font-size: large;
+    background: inherit;
+    caret-color: #56BC58;
+    border-bottom: 2px solid white;
+    color: white;
+    padding-bottom: 10px;
+}
+
+.input::placeholder {
+    color: rgb(162, 157, 157);
+}
+
+.input:focus {
+    outline: none;
+}
+
+.submitButton {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #56BC58;
+    border: none;
+    cursor: pointer;
+}
+
+.white {
+    color: white;
+}
+
+.message {
+    font-size: 18px;
+    text-align: center;
+}
+
+.error {
+    color: rgb(255, 60, 60);
+}
+
+.success {
+    color: rgb(35, 211, 35);
+}
+
+.none {
+    display: none;
+}
+
+.link {
+    text-decoration: underline;
+    color: #56BC58; /* Change the link color */
+    transition: color 0.3s ease; /* Smooth transition for color change */
+    user-select: unset;
+}
+
+.link:hover {
+    color: #3E8E41; /* Change link color on hover */
+}

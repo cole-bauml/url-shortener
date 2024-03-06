@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Url Shortener</title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+
+<body>
+    <div class="content">
+        <h1 class="main-title">Shorten a URL</h1>
+        <h3 class="message none" id="message">Already in use.</h3>
+        <div class="form">
+            <input type="url" name="url" id="urlInput" placeholder="Enter your URL to shorten." class="input">
+            <input type="text" name="path" id="pathInput" placeholder="Enter your URL alias." class="input">
+            <button id="submitButton" class="submitButton">Create Link</button>
+        </div>
+    </div>
+
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        var messageElement = document.querySelector('#message')
+        const submitButton = document.querySelector('#submitButton');
+        submitButton.addEventListener('click', async () => {
+            const formData = {
+                url: document.querySelector('#urlInput').value,
+                path: document.querySelector('#pathInput').value
+            };
+
+            const fetchRequest = await fetch('/create-link', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            
+            var res = await fetchRequest.json();
+
+            if(res.type == "error"){
+                // Display error message
+                messageElement.classList.remove('none')
+                messageElement.classList.add('error')
+                messageElement.innerText = res.message;
+            }
+
+            if(res.type == "success"){
+                // Display success message
+                messageElement.classList.remove('none')
+                messageElement.classList.add('success')
+                messageElement.innerText = res.message;
+
+                if(res.action == "create-link"){
+                    document.querySelector('.form').innerHTML = `<p class="white">Your link:<br><br> <a href="${location.href}${formData.path}" class="link">${location.href}${formData.path}</a></p>`
+                }
+            }
+        });
+    });
+</script>
+
+
+</html>

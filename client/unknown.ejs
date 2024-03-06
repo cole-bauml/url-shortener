@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unknown Link</title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+
+<body>
+    <div class="content">
+        <h1 class="main-title">We couldn't find that link...</h1>
+        <div class="form">
+            <button id="homeButton" class="submitButton">Go Home</button>
+        </div>
+
+    </div>
+</body>
+
+<script>
+    var homeButton = document.querySelector('#homeButton');
+    homeButton.addEventListener('click', () => {
+        location.href = "/"
+    })
+</script>
+
+</html>
