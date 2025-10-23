@@ -4,28 +4,28 @@ const path = require("node:path");
 const express = require('express');
 const app = express();
 
-var session = require('express-session')
-var MongoDBStore = require('connect-mongodb-session')(session);
-var store = new MongoDBStore({
-    uri: `mongodb://127.0.0.1:27017/${process.env.databaseName}`,
-    collection: 'sessions'
-});
+// var session = require('express-session')
+// var MongoDBStore = require('connect-mongodb-session')(session);
+// var store = new MongoDBStore({
+//     uri: `mongodb://127.0.0.1:27017/${process.env.databaseName}`,
+//     collection: 'sessions'
+// });
 
-store.on('error', function(error) {
-    console.log(`Can't connect to database session store. Error: ${error}`);
-    return;
-});
+// store.on('error', function(error) {
+//     console.log(`Can't connect to database session store. Error: ${error}`);
+//     return;
+// });
 
-// Unimplimented Sessions
-app.use(session({
-    secret: process.env.sessionSecret, // Random string
-    resave: false,
-    saveUninitialized: false, // Don't create a cookie before a value is attempted to be set.
-    cookie: {
-        maxAge: 864000000 // Ten days before automatic session delete and sign out
-    },
-    store: store
-}));
+// // Unimplimented Sessions
+// app.use(session({
+//     secret: process.env.sessionSecret, // Random string
+//     resave: false,
+//     saveUninitialized: false, // Don't create a cookie before a value is attempted to be set.
+//     cookie: {
+//         maxAge: 864000000 // Ten days before automatic session delete and sign out
+//     },
+//     store: store
+// }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 console.log(__dirname)
