@@ -1,4 +1,5 @@
 require('dotenv').config();
+const path = require("node:path");
 
 const express = require('express');
 const app = express();
@@ -32,7 +33,7 @@ console.log(__dirname)
 const { main } = require('./database.js');
 main();
 
-app.set('views', `${__dirname}\\client`);
+app.set("views", path.join(__dirname, "client"));
 app.set('view engine', 'ejs')
 
 const { homeRoutes } = require('./routes/home.js')
