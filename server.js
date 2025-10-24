@@ -29,11 +29,17 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use((req, res, next) => {
-    // Replace all leading double slashes with a single slash
-    req.url = req.url.replace(/^\/+/, '/');
+  // Collapse multiple slashes anywhere in the path to a single slash
+  req.url = req.url.replace(/\/+/g, '/');
 
-    next();
+  const prefix = '/assignment-submissions'; // Prefix if the server isnt hosted at base
+  if (req.url.startsWith(prefix)) {
+    req.url = req.url.slice(prefix.length) || '/'; // keep at least a single slash
+  }
+
+  next();
 });
+
 
 
 console.log(__dirname)
