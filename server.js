@@ -28,6 +28,17 @@ const app = express();
 // }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use((req, res, next) => {
+    // Normalize multiple slashes to a single slash
+    req.url = req.url.replace(/\/{2,}/g, '/');
+
+    // Optionally remove trailing slash (except for root "/")
+    if (req.url.length > 1 && req.url.endsWith('/')) {
+        req.url = req.url.slice(0, -1);
+    }
+
+    next();
+});
 console.log(__dirname)
 
 const { main } = require('./database.js');
