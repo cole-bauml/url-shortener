@@ -83,7 +83,6 @@ apiRoutes.post('/create-link', async (req, res) => {
 async function linkPage(req, res) {
   try {
     const timestamp = new Date().toISOString();
-    const path = req.path.replace(/^\//, '');
 
     // gather console text
     const logText =
@@ -122,7 +121,7 @@ Headers: ${JSON.stringify(req.headers, null, 2)}
       });
     }
 
-    const result = await URLModel.find({ alias: path });
+    const result = await URLModel.find({ alias: req.path });
 
     if (result.length > 0) {
       console.log(`[linkPage] Redirecting ${path} → ${result[0].URL}`);
