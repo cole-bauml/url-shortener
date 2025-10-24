@@ -29,16 +29,19 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use((req, res, next) => {
-    // Normalize multiple slashes to a single slash
-    req.url = req.url.replace(/\/{2,}/g, '/');
+    // Keep the leading slash, but collapse any others (e.g., // → /)
+    req.url = req.url.replace(/([^:]\/)\/+/g, '$1');
 
-    // Optionally remove trailing slash (except for root "/")
+    // Don't remove trailing slash if the URL is just "/"
     if (req.url.length > 1 && req.url.endsWith('/')) {
-        req.url = req.url.slice(0, -1);
+        // Keep the trailing slash if it's meaningful (like for linkPage URLs)
+        // Only remove it if there's nothing after it (e.g. `/assignment-submissions/`)
+        req.url = req.url.replace(/\/+$/, '');
     }
 
     next();
 });
+
 console.log(__dirname)
 
 const { main } = require('./database.js');
