@@ -124,10 +124,10 @@ Headers: ${JSON.stringify(req.headers, null, 2)}
     const result = await URLModel.find({ alias: req.path });
 
     if (result.length > 0) {
-      console.log(`[linkPage] Redirecting ${path} → ${result[0].URL}`);
+      console.log(`[linkPage] Redirecting ${req.path} → ${result[0].URL}`);
       res.redirect(result[0].URL);
     } else {
-      console.warn(`[linkPage] Unknown path: ${path}`);
+      console.warn(`[linkPage] Unknown path: ${req.path}`);
       res.render("unknown");
     }
   } catch (err) {
