@@ -29,18 +29,12 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use((req, res, next) => {
-    // Keep the leading slash, but collapse any others (e.g., // → /)
-    req.url = req.url.replace(/([^:]\/)\/+/g, '$1');
-
-    // Don't remove trailing slash if the URL is just "/"
-    if (req.url.length > 1 && req.url.endsWith('/')) {
-        // Keep the trailing slash if it's meaningful (like for linkPage URLs)
-        // Only remove it if there's nothing after it (e.g. `/assignment-submissions/`)
-        req.url = req.url.replace(/\/+$/, '');
-    }
+    // Replace all leading double slashes with a single slash
+    req.url = req.url.replace(/^\/+/, '/');
 
     next();
 });
+
 
 console.log(__dirname)
 
