@@ -30,14 +30,13 @@
                 path: document.querySelector('#pathInput').value
             };
 
-            const fetchRequest = await fetch('/create-link', {
+            const fetchRequest = await fetch(`${window.location.pathname}/create-link`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(formData)
             });
-
             
             var res = await fetchRequest.json();
 
