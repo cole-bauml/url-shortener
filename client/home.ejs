@@ -54,7 +54,7 @@
                 messageElement.innerText = res.message;
 
                 if(res.action == "create-link"){
-                    document.querySelector('.form').innerHTML = `<p class="white">Your link:<br><br> <a href="${location.href}${formData.path}" class="link">${location.href}${formData.path}</a></p>`
+                    document.querySelector('.form').innerHTML = `<p class="white">Your link:<br><br> <a href="${location.href}${formData.path}" class="link">${location.href}/${formData.path}</a></p>`
                 }
             }
         });
